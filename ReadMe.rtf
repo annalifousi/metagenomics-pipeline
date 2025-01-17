@@ -1,240 +1,65 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
-{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Bold;\f2\fmodern\fcharset0 Courier;
-\f3\fnil\fcharset0 HelveticaNeue;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;\red179\green179\blue179;
-}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c0\c84706;\cssrgb\c75294\c75294\c75294;
-}
-{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
-{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
-{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}
-{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
-{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}}
-{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}}
-\paperw11900\paperh16840\margl1440\margr1440\vieww21900\viewh14060\viewkind0
-\deftab720
-\pard\pardeftab720\sl280\sa120\partightenfactor0
 
-\f0\fs24 \cf2 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 \
-\pard\pardeftab720\sl560\sa321\partightenfactor0
+Genomic Data Processing Pipeline
+This study explores microbial diversity and resistance in pig fecal samples from different regions. Using Computerome, four samples were processed (NL, IT, BG, DK) with tools like FASTP, FASTQC, MultiQC, and databases like Resfinder and Silva. 
+Requirements
+Before running the script, ensure that the following tools and databases are installed and properly configured:
+	•	fastp: For quality trimming and adapter removal
+	•	fastqc: For quality control of sequencing reads
+	•	multiqc: For generating a combined quality control report
+	•	kma: For sequence alignment and mapping (ResFinder and Silva databases)
+	•	spades: For de novo genome assembly
+	•	bbmap: For alignment of reads to assembly scaffolds
+	•	samtools: For manipulating and processing SAM/BAM files
+	•	metabat2: For binning of assembled genomes
+	•	checkm2: For checking genome completeness
+	•	dRep: For dereplicating genomes to remove duplicates
+	•	gtdbtk: For taxonomic classification of genomes
+	•	awk: For ALR (antimicrobial resistance) calculation
 
-\f1\b\fs48 \cf2 Genomic Data Processing Pipeline\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
+Databases
+The following reference databases are required:
+	•	ResFinder database for resistance gene detection
+	•	Silva database for rRNA sequence alignment
+	•	KMA-Silva v138 database for rRNA sequence mapping
+Ensure that the paths to these databases are correctly set in the script.
+Setup
+	1.	Clone this repository or download the script file to your local machine.
+	2.	Modify the PROJECT_DIR and other directory paths to match your project setup.
+	3.	Set the paths to the required databases in the script.
 
-\f0\b0\fs24 \cf2 This study explores microbial diversity and resistance in pig fecal samples from different regions. Using Computerome, four samples were processed (NL, IT, BG, DK) with tools like FASTP, FASTQC, MultiQC, and databases like Resfinder and Silva. \
-\pard\pardeftab720\sl440\sa298\partightenfactor0
+Running the Pipeline
+1. Configuration
+Ensure the following variables are set according to your project:
+	•	PROJECT_DIR: The root directory of your project
+	•	TRIM_DIR: Directory where trimmed reads will be stored
+	•	KMA_DIR: Directory for KMA results
+	•	SILVA_DIR: Directory for Silva results
+	•	ASSEMBLY_DIR: Directory for assembled genomes
+	•	MAPPED_DIR: Directory for alignment results
+	•	BINS_DIR: Directory for genomic bins
+	•	CHECKM2_DIR: Directory for CheckM2 results
+	•	DREP_DIR: Directory for dRep results
+	•	GTDB_DIR: Directory for GTDB-Tk results
+	•	SAMPLES: List of sample identifiers to be processed
 
-\f1\b\fs36 \cf2 Requirements\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
+2. Execute the Script
+To run the pipeline, execute the following command from your terminal:
+bash
+CopyEdit
+bash pipeline.sh
 
-\f0\b0\fs24 \cf2 Before running the script, ensure that the following tools and databases are installed and properly configured:\
-\pard\tx220\tx720\pardeftab720\li720\fi-720\sl280\partightenfactor0
-\ls1\ilvl0
-\f1\b \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 fastp
-\f0\b0 : For quality trimming and adapter removal\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 fastqc
-\f0\b0 : For quality control of sequencing reads\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 multiqc
-\f0\b0 : For generating a combined quality control report\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 kma
-\f0\b0 : For sequence alignment and mapping (ResFinder and Silva databases)\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 spades
-\f0\b0 : For de novo genome assembly\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 bbmap
-\f0\b0 : For alignment of reads to assembly scaffolds\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 samtools
-\f0\b0 : For manipulating and processing SAM/BAM files\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 metabat2
-\f0\b0 : For binning of assembled genomes\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 checkm2
-\f0\b0 : For checking genome completeness\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 dRep
-\f0\b0 : For dereplicating genomes to remove duplicates\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 gtdbtk
-\f0\b0 : For taxonomic classification of genomes\
-\ls1\ilvl0
-\f1\b \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 awk
-\f0\b0 : For ALR (antimicrobial resistance) calculation\
-\pard\pardeftab720\sl340\sa280\partightenfactor0
+3. Output
+The script will create various output directories under PROJECT_DIR:
+	•	Trim: Contains the quality-trimmed sequences.
+	•	fastqc: Contains the FASTQC reports for quality checks.
+	•	multiqc: Contains the combined MultiQC report.
+	•	kma: Contains the mapping results from KMA (ResFinder and Silva).
+	•	assemblies: Contains the genome assembly results.
+	•	mapped: Contains the mapped reads in BAM format.
+	•	bins: Contains the genomic bins from Metabat2.
+	•	checkm2: Contains the CheckM2 completeness analysis.
+	•	drep2: Contains the dereplicated genomes from dRep.
+	•	gtdb: Contains the taxonomic classification results from GTDB-Tk.
 
-\f1\b\fs28 \cf2 \
-Databases\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
-
-\f0\b0\fs24 \cf2 The following reference databases are required:\
-\pard\tx220\tx720\pardeftab720\li720\fi-720\sl280\partightenfactor0
-\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 ResFinder database for resistance gene detection\
-\ls2\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Silva database for rRNA sequence alignment\
-\ls2\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 KMA-Silva v138 database for rRNA sequence mapping\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
-\cf2 Ensure that the paths to these databases are correctly set in the script.\
-\pard\pardeftab720\sl440\sa298\partightenfactor0
-
-\f1\b\fs36 \cf2 Setup\
-\pard\tx220\tx720\pardeftab720\li720\fi-720\sl280\partightenfactor0
-\ls3\ilvl0
-\f0\b0\fs24 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	1.	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Clone this repository or download the script file to your local machine.\
-\ls3\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	2.	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Modify the 
-\f2 PROJECT_DIR
-\f0  and other directory paths to match your project setup.\
-\ls3\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	3.	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Set the paths to the required databases in the script.\
-\pard\pardeftab720\sl440\sa298\partightenfactor0
-
-\f1\b\fs36 \cf2 \
-Running the Pipeline\
-\pard\pardeftab720\sl340\sa280\partightenfactor0
-
-\fs28 \cf2 1. Configuration\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
-
-\f0\b0\fs24 \cf2 Ensure the following variables are set according to your project:\
-\pard\tx220\tx720\pardeftab720\li720\fi-720\sl280\partightenfactor0
-\ls4\ilvl0
-\f2 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 PROJECT_DIR
-\f0 : The root directory of your project\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 TRIM_DIR
-\f0 : Directory where trimmed reads will be stored\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 KMA_DIR
-\f0 : Directory for KMA results\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 SILVA_DIR
-\f0 : Directory for Silva results\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 ASSEMBLY_DIR
-\f0 : Directory for assembled genomes\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 MAPPED_DIR
-\f0 : Directory for alignment results\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 BINS_DIR
-\f0 : Directory for genomic bins\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 CHECKM2_DIR
-\f0 : Directory for CheckM2 results\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 DREP_DIR
-\f0 : Directory for dRep results\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 GTDB_DIR
-\f0 : Directory for GTDB-Tk results\
-\ls4\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 SAMPLES
-\f0 : List of sample identifiers to be processed\
-\pard\pardeftab720\sl340\sa280\partightenfactor0
-
-\f1\b\fs28 \cf2 \
-2. Execute the Script\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
-
-\f0\b0\fs24 \cf2 To run the pipeline, execute the following command from your terminal:\
-\pard\pardeftab720\sl280\partightenfactor0
-
-\f2 \cf2 bash\
-\pard\pardeftab720\sl260\partightenfactor0
-
-\f3\fs22 \cf3 \cb4 \strokec3 CopyEdit
-\f2\fs24 \cf2 \cb1 \strokec2 \
-\pard\pardeftab720\sl280\partightenfactor0
-\cf2 bash pipeline.sh\
-\pard\pardeftab720\sl340\sa280\partightenfactor0
-
-\f1\b\fs28 \cf2 \
-3. Output\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
-
-\f0\b0\fs24 \cf2 The script will create various output directories under 
-\f2 PROJECT_DIR
-\f0 :\
-\pard\tx220\tx720\pardeftab720\li720\fi-720\sl280\partightenfactor0
-\ls5\ilvl0
-\f2 \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 Trim
-\f0 : Contains the quality-trimmed sequences.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 fastqc
-\f0 : Contains the FASTQC reports for quality checks.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 multiqc
-\f0 : Contains the combined MultiQC report.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 kma
-\f0 : Contains the mapping results from KMA (ResFinder and Silva).\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 assemblies
-\f0 : Contains the genome assembly results.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 mapped
-\f0 : Contains the mapped reads in BAM format.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 bins
-\f0 : Contains the genomic bins from Metabat2.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 checkm2
-\f0 : Contains the CheckM2 completeness analysis.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 drep2
-\f0 : Contains the dereplicated genomes from dRep.\
-\ls5\ilvl0
-\f2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 gtdb
-\f0 : Contains the taxonomic classification results from GTDB-Tk.\
-\pard\pardeftab720\sl340\sa280\partightenfactor0
-
-\f1\b\fs28 \cf2 \
-4. ALR Calculation\
-\pard\pardeftab720\sl280\sa240\partightenfactor0
-
-\f0\b0\fs24 \cf2 The script calculates the 
-\f1\b ALR (Antimicrobial Resistance Log)
-\f0\b0  for each sample based on pre-defined FPKM (Fragments Per Kilobase of transcript per Million mapped reads) values and prints the results.\
-}
+4. ALR Calculation
+The script calculates the ALR (Antimicrobial Resistance Log) for each sample based on pre-defined FPKM (Fragments Per Kilobase of transcript per Million mapped reads) values and prints the results.
