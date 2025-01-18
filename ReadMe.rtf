@@ -1,6 +1,7 @@
 
 Genomic Data Processing Pipeline
 This study explores microbial diversity and resistance in pig fecal samples from different regions. Using Computerome, four samples were processed (NL, IT, BG, DK) with tools like FASTP, FASTQC, MultiQC, and databases like Resfinder and Silva. 
+
 Requirements
 Before running the script, ensure that the following tools and databases are installed and properly configured:
 	•	fastp: For quality trimming and adapter removal
@@ -22,10 +23,7 @@ The following reference databases are required:
 	•	Silva database for rRNA sequence alignment
 	•	KMA-Silva v138 database for rRNA sequence mapping
 Ensure that the paths to these databases are correctly set in the script.
-Setup
-	1.	Clone this repository or download the script file to your local machine.
-	2.	Modify the PROJECT_DIR and other directory paths to match your project setup.
-	3.	Set the paths to the required databases in the script.
+
 
 Running the Pipeline
 1. Configuration
@@ -44,8 +42,6 @@ Ensure the following variables are set according to your project:
 
 2. Execute the Script
 To run the pipeline, execute the following command from your terminal:
-bash
-CopyEdit
 bash pipeline.sh
 
 3. Output
